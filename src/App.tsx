@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
@@ -14,6 +14,16 @@ import Login from './pages/admin/Login';
 import Dashboard from './pages/admin/Dashboard';
 import ProjectDetails from './pages/ProjectDetails';
 
+const HomePage = () => (
+  <Layout>
+    <Hero />
+    <Projects />
+    <Skills />
+    <About />
+    <Contact />
+  </Layout>
+);
+
 function App() {
   return (
     <BrowserRouter>
@@ -21,33 +31,15 @@ function App() {
         <AuthProvider>
           <Toaster position="top-right" />
           <Routes>
-            <Route path="/" element={
-              <Layout>
-                <Hero />
-                <Projects />
-                <Skills />
-                <About />
-                <Contact />
-              </Layout>
-            } />
+            <Route path="/" element={<HomePage />} />
             <Route path="/project/:id" element={<ProjectDetails />} />
-            <Route path="/admin">
-              <Route path="login" element={<Login />} />
-              <Route path="dashboard" element={
-                <AdminRoute>
-                  <Dashboard />
-                </AdminRoute>
-              } />
-            </Route>
-            <Route path="*" element={
-              <Layout>
-                <Hero />
-                <Projects />
-                <Skills />
-                <About />
-                <Contact />
-              </Layout>
+            <Route path="/admin/login" element={<Login />} />
+            <Route path="/admin/dashboard" element={
+              <AdminRoute>
+                <Dashboard />
+              </AdminRoute>
             } />
+            <Route path="*" element={<Navigate to="/\" replace />} />
           </Routes>
         </AuthProvider>
       </ThemeProvider>
