@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
@@ -38,9 +38,16 @@ function App() {
                   <Dashboard />
                 </AdminRoute>
               } />
-              <Route index element={<Navigate to="/admin/login\" replace />} />
             </Route>
-            <Route path="*" element={<Navigate to="/\" replace />} />
+            <Route path="*" element={
+              <Layout>
+                <Hero />
+                <Projects />
+                <Skills />
+                <About />
+                <Contact />
+              </Layout>
+            } />
           </Routes>
         </AuthProvider>
       </ThemeProvider>
