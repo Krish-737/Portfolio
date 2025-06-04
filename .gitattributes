@@ -1,0 +1,19 @@
+# Auto normalize line endings for text files
+* text=auto
+
+# Explicitly set text file types
+*.js text
+*.ts text
+*.tsx text
+*.json text
+*.html text
+*.css text
+*.md text
+
+# Declare binary files to avoid line ending conversion
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
